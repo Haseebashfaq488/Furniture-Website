@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import authRoutes from './routes/authRoutes'
 
 // Load environment variables from .env file
 dotenv.config()
@@ -14,6 +15,8 @@ const app = express()
 // Middleware - allows server to accept JSON and cross-origin requests
 app.use(cors())
 app.use(express.json())
+// Routes
+app.use('/api/auth', authRoutes)
 
 // Test route - just to confirm server is running
 app.get('/', (req, res) => {
