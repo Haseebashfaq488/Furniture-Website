@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+
 import {
   Box,
   Container,
@@ -211,6 +211,7 @@ const Navbar = () => {
                     position: 'absolute',
                     bottom: 0,
                     left: 0,
+                    color: 'black',
                     height: '3px',
                     background: 'linear-gradient(to right, #1fa055, #22c55e)',
                     borderRadius: '3px',

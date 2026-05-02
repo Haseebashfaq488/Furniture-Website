@@ -11,7 +11,7 @@ const theme = createTheme({
   typography: {
     fontFamily: '"Albert Sans", sans-serif',
     h1: { fontSize: '70px', fontWeight: 600, lineHeight: 1.05 },
-    h2: { fontSize: '30px', fontWeight: 600, lineHeight: 1.2 },
+    h2: { fontSize: '40px', fontWeight: 600, lineHeight: 1.2 },
     h3: { fontSize: '30px', fontWeight: 600, lineHeight: 1.2 },
     h5: { fontSize: '24px', fontWeight: 600, lineHeight: 1.2 },
     body1: { fontSize: '15px', fontWeight: 400 },
@@ -53,3 +53,6 @@ function App() {
 }
 
 export default App;
+
+
+
