@@ -5,8 +5,9 @@ import ShopByColor from './ShopByColor';
 import IlluminateYourWorld from './IlluminateYourWorld';
 import PromotionalBanner from './PromotionalBanner';
 import SustainabilitySection from './SustainabilitySection';
-import WhyCozyCorner from './WhyCozyCorner';
 import Testimonials from './Testimonials';
+import { HeroSection, FeaturesSection } from './cozycorner';
+
 
 const Home = () => {
   return (
@@ -17,8 +18,9 @@ const Home = () => {
       <IlluminateYourWorld />
       <PromotionalBanner />
       <SustainabilitySection />
-      <WhyCozyCorner />
       <Testimonials />
+      <HeroSection />
+      <FeaturesSection />
     </Box>
   );
 };

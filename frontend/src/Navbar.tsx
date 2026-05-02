@@ -1,3 +1,6 @@
+'use client';
+
+import React from 'react';
 import {
   Box,
   Container,
@@ -7,6 +10,7 @@ import {
   Badge,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   Search,
   Person,
@@ -17,7 +21,7 @@ import {
 
 const Navbar = () => {
   return (
-    <Box sx={{ bgcolor: '#ffffff', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+    <Box sx={{ bgcolor: '#ffffff', boxShadow: '0 2px 10px rgba(0,0,0,0.06)' }}>
       {/* Top Promotion Banner */}
       <Box sx={{ bgcolor: '#f8f9fa', py: 1, borderBottom: '1px solid #eee' }}>
         <Container maxWidth="xl">
@@ -38,7 +42,7 @@ const Navbar = () => {
               to="/shop"
               style={{ color: '#1976d2', fontWeight: 500, marginLeft: '8px', fontSize: '0.9rem', textDecoration: 'underline' }}
             >
-              Shop Sofas and Couches →
+              Shop Now →
             </Link>
           </Box>
         </Container>
@@ -47,48 +51,60 @@ const Navbar = () => {
       {/* Main Navbar */}
       <Container maxWidth="xl">
         <Box sx={{ py: 2.5, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          {/* Logo */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, cursor: 'pointer' }}>
-            <Box
-              sx={{
-                width: 48,
-                height: 48,
-                bgcolor: '#1fa055',
-                borderRadius: 1.5,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-              }}
-            >
-              <Typography sx={{ fontSize: '28px', fontWeight: 800, lineHeight: 1 }}>🏠</Typography>
-            </Box>
-            <Box>
-              <Typography
-                sx={{
-                  fontWeight: 900,
-                  fontSize: '1.65rem',
-                  lineHeight: 1,
-                  letterSpacing: '-1px',
-                  color: '#1a1a1a',
-                }}
-              >
-                COZY
-              </Typography>
-              <Typography
-                sx={{
-                  fontWeight: 900,
-                  fontSize: '1.65rem',
-                  lineHeight: 1,
-                  letterSpacing: '-1px',
-                  color: '#1a1a1a',
-                  mt: -0.8,
-                }}
-              >
-                CORNER
-              </Typography>
-            </Box>
-          </Box>
+
+          {/* Logo with Hover Animation */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, cursor: 'pointer' }}>
+                <Box
+                  sx={{
+                    width: 52,
+                    height: 52,
+                    bgcolor: '#1fa055',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontSize: '32px',
+                    transition: 'transform 0.4s ease',
+                  }}
+                  component={motion.div}
+                  whileHover={{ rotate: [0, -12, 12, 0] }}
+                >
+                  🏠
+                </Box>
+                <Box>
+                  <Typography
+                    sx={{
+                      fontWeight: 900,
+                      fontSize: '1.75rem',
+                      lineHeight: 1,
+                      letterSpacing: '-1.5px',
+                      color: '#1a1a1a',
+                    }}
+                  >
+                    COZY
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: 900,
+                      fontSize: '1.75rem',
+                      lineHeight: 1,
+                      letterSpacing: '-1.5px',
+                      color: '#1a1a1a',
+                      mt: -0.9,
+                    }}
+                  >
+                    CORNER
+                  </Typography>
+                </Box>
+              </Box>
+            </Link>
+          </motion.div>
 
           {/* Search Bar */}
           <Box
@@ -103,56 +119,48 @@ const Navbar = () => {
               px: 2.5,
               py: 1,
               bgcolor: '#fafafa',
+              transition: 'all 0.3s',
+              '&:focus-within': {
+                borderColor: '#1fa055',
+                boxShadow: '0 0 0 3px rgba(31, 160, 85, 0.1)',
+              },
             }}
           >
             <Search sx={{ color: '#666', mr: 1.5 }} />
             <InputBase
-              placeholder="Search for products..."
+              placeholder="Search for furniture..."
               fullWidth
-              sx={{ fontSize: '0.95rem', color: '#333' }}
+              sx={{ fontSize: '0.97rem', color: '#333' }}
             />
           </Box>
 
           {/* Right Section */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-            {/* Phone */}
             <Box sx={{ display: { xs: 'none', lg: 'flex' }, alignItems: 'center', gap: 1.5 }}>
               <PhoneOutlined sx={{ color: '#555', fontSize: 26 }} />
               <Box>
                 <Typography variant="caption" sx={{ color: '#777', display: 'block', lineHeight: 1 }}>
                   Need help?
                 </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{ fontWeight: 700, color: '#1a1a1a' }}
-                >
+                <Typography variant="body2" sx={{ fontWeight: 700, color: '#1a1a1a' }}>
                   +1-202-555-0172
                 </Typography>
               </Box>
             </Box>
 
-            {/* Icons */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-              <IconButton sx={{ color: '#333' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
                 <Person />
               </IconButton>
 
-              <IconButton sx={{ color: '#333' }}>
-                <Badge badgeContent={0} color="error">
+              <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
+                <Badge badgeContent={3} color="error">
                   <FavoriteBorder />
                 </Badge>
               </IconButton>
 
-              <IconButton sx={{ color: '#333' }}>
-                <Badge
-                  badgeContent={0}
-                  color="success"
-                  sx={{
-                    '& .MuiBadge-badge': {
-                      backgroundColor: '#1fa055',
-                    },
-                  }}
-                >
+              <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
+                <Badge badgeContent={2} color="success">
                   <ShoppingBagOutlined />
                 </Badge>
               </IconButton>
@@ -161,53 +169,55 @@ const Navbar = () => {
         </Box>
       </Container>
 
-      {/* Bottom Navigation */}
+      {/* Bottom Navigation with Animated Underline */}
       <Box sx={{ borderTop: '1px solid #eaeaea', bgcolor: '#fff' }}>
         <Container maxWidth="xl">
           <Box
             sx={{
               display: { xs: 'none', md: 'flex' },
               alignItems: 'center',
-              gap: 4,
-              py: 2,
-              fontSize: '0.95rem',
+              gap: 5,
+              py: 2.2,
+              fontSize: '1rem',
               fontWeight: 600,
               color: '#333',
             }}
           >
-            <Link
-              to="/"
-              style={{
-                textDecoration: 'none',
-                color: '#333',
-                fontWeight: 600,
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Home
-            </Link>
-            <Link
-              to="/shop"
-              style={{
-                textDecoration: 'none',
-                color: '#333',
-                fontWeight: 600,
-                whiteSpace: 'nowrap',
-              }}
-            >
-              Shop
-            </Link>
-            <Link
-              to="/configurator"
-              style={{
-                textDecoration: 'none',
-                color: '#333',
-                fontWeight: 600,
-                whiteSpace: 'nowrap',
-              }}
-            >
-              3D Configurator
-            </Link>
+            {[
+              { name: 'Home', to: '/' },
+              { name: 'Shop', to: '/shop' },
+              { name: '3D Configurator', to: '/configurator' },
+              { name: 'About', to: '/about' },
+              { name: 'Contact', to: '/contact' },
+            ].map((item) => (
+              <Link
+                key={item.name}
+                to={item.to}
+                style={{ textDecoration: 'none', position: 'relative', padding: '6px 0' }}
+              >
+                <motion.span
+                  whileHover={{ color: '#1fa055' }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {item.name}
+                </motion.span>
+
+                {/* Animated Underline */}
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileHover={{ width: '100%' }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    height: '3px',
+                    background: 'linear-gradient(to right, #1fa055, #22c55e)',
+                    borderRadius: '3px',
+                  }}
+                />
+              </Link>
+            ))}
           </Box>
         </Container>
       </Box>
