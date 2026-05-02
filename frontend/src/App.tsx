@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Home from './pages/HomePage/Home';
 import ShopPage from './pages/ShopPage/ShopPage';
 import ConfiguratorPage from './pages/ConfiguratorPage/ConfiguratorPage';
+import AboutPage from './pages/AboutPage/AboutPage';
 import Footer from './Footer';
 
 // Define the global theme matching CozyCorner demo
@@ -46,6 +47,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/configurator" element={<ConfiguratorPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
       <Footer />
     </ThemeProvider>

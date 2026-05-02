@@ -1,13 +1,58 @@
-import { Box, Container, Typography, IconButton, Link, Divider } from '@mui/material';
+import { useState } from 'react';
+import { Box, Container, Typography, IconButton, Link, Divider, InputBase, Button } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = () => {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+    setSubscribed(true);
+    setEmail('');
+    setTimeout(() => setSubscribed(false), 3000);
+  };
+
   return (
     <Box sx={{ bgcolor: '#fff', color: '#333', pt: 8, pb: 2, borderTop: '1px solid #eaeaea' }}>
       <Container maxWidth="xl">
 
+        {/* Newsletter Row */}
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: 'center', mb: 8, gap: 4 }}>
+          <Typography variant="h6" sx={{ fontWeight: 600, color: '#333' }}>
+            Join our newsletter and <span style={{ color: '#1fa055' }}>get $20 discount</span> for your first order!
+          </Typography>
+          <Box sx={{ display: 'flex', border: '1px solid #ccc', borderRadius: 30, overflow: 'hidden', pl: 2, maxWidth: 400, width: '100%' }}>
+            <InputBase
+              placeholder="Enter your email address"
+              fullWidth
+              sx={{ fontSize: '0.9rem' }}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') handleSubscribe(); }}
+            />
+            <Button
+              variant="contained"
+              onClick={handleSubscribe}
+              sx={{
+                bgcolor: subscribed ? '#1fa055' : '#111',
+                color: '#fff',
+                borderRadius: 30,
+                px: 4,
+                py: 1.5,
+                whiteSpace: 'nowrap',
+                '&:hover': { bgcolor: subscribed ? '#1fa055' : '#333' },
+              }}
+            >
+              {subscribed ? '✓ Subscribed!' : 'Subscribe'}
+            </Button>
+          </Box>
+        </Box>
 
         <Divider sx={{ mb: 8 }} />
 
