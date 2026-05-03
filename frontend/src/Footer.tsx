@@ -57,7 +57,7 @@ const Footer = () => {
         <Divider sx={{ mb: 8 }} />
 
         {/* Links Columns */}
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.5fr 1fr 1fr 1fr 1fr' }, gap: 6, mb: 6 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: '1.5fr 1fr 1fr 1fr 1fr' }, gap: { xs: 4, md: 6 }, mb: 6 }}>
           <Box>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 4 }}>
               <Box sx={{ width: 30, height: 30, bgcolor: '#1fa055', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 1 }}>
@@ -107,7 +107,7 @@ const Footer = () => {
         <Divider sx={{ mb: 4 }} />
 
         {/* Bottom Banner */}
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', mb: 4, gap: 2 }}>
           <Typography variant="body2" sx={{ color: '#aaa', fontSize: '0.8rem' }}>
             &copy; {new Date().getFullYear()} CozyCorner. All rights reserved.
           </Typography>

@@ -8,7 +8,12 @@ import {
   IconButton,
   InputBase,
   Badge,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
 } from '@mui/material';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -17,9 +22,15 @@ import {
   FavoriteBorder,
   ShoppingBagOutlined,
   PhoneOutlined,
+  Menu as MenuIcon,
 } from '@mui/icons-material';
+import { useAuth } from './context/AuthContext';
 
 const Navbar = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
   return (
     <Box sx={{ bgcolor: '#ffffff', boxShadow: '0 2px 10px rgba(0,0,0,0.06)' }}>
       {/* Top Promotion Banner */}
@@ -111,8 +122,8 @@ const Navbar = () => {
             sx={{
               flex: 1,
               maxWidth: 520,
-              mx: 6,
-              display: { xs: 'none', md: 'flex' },
+              mx: { xs: 2, md: 6 },
+              display: { xs: 'none', sm: 'flex' },
               alignItems: 'center',
               border: '1px solid #e0e0e0',
               borderRadius: '50px',
@@ -148,10 +159,21 @@ const Navbar = () => {
               </Box>
             </Box>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
-                <Person />
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 } }}>
+              <IconButton 
+                color="inherit" 
+                edge="start" 
+                onClick={handleDrawerToggle}
+                sx={{ display: { md: 'none' }, color: '#333' }}
+              >
+                <MenuIcon />
               </IconButton>
+
+              <Link to={useAuth().isAuthenticated ? "/profile" : "/auth"}>
+                <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
+                  <Person />
+                </IconButton>
+              </Link>
 
               <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
                 <Badge badgeContent={3} color="error">
@@ -190,38 +212,79 @@ const Navbar = () => {
               { name: 'About', to: '/about' },
               { name: 'Contact', to: '/contact' },
             ].map((item) => (
-              <Link
+              <motion.div
                 key={item.name}
-                to={item.to}
-                style={{ textDecoration: 'none', position: 'relative', padding: '6px 0' }}
+                initial="rest"
+                whileHover="hover"
+                animate="rest"
               >
-                <motion.span
-                  whileHover={{ color: '#1fa055' }}
-                  transition={{ duration: 0.2 }}
+                <Link
+                  to={item.to}
+                  style={{ textDecoration: 'none', position: 'relative', padding: '6px 0', display: 'block' }}
                 >
-                  {item.name}
-                </motion.span>
+                  <Box sx={{ color: '#333', transition: 'color 0.2s', '&:hover': { color: '#1fa055' } }}>
+                    {item.name}
+                  </Box>
 
-                {/* Animated Underline */}
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileHover={{ width: '100%' }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    color: 'black',
-                    height: '3px',
-                    background: 'linear-gradient(to right, #1fa055, #22c55e)',
-                    borderRadius: '3px',
-                  }}
-                />
-              </Link>
+                  {/* Animated Underline */}
+                  <motion.div
+                    variants={{
+                      rest: { width: 0, opacity: 0 },
+                      hover: { width: '100%', opacity: 1 }
+                    }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      height: '3px',
+                      background: 'linear-gradient(to right, #1fa055, #22c55e)',
+                      borderRadius: '3px',
+                    }}
+                  />
+                </Link>
+              </motion.div>
             ))}
           </Box>
         </Container>
       </Box>
+
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        sx={{ '& .MuiDrawer-paper': { width: 250, bgcolor: '#fafafa', pt: 2 } }}
+      >
+        <Box sx={{ p: 2 }}>
+          <Typography variant="h6" sx={{ fontWeight: 900, color: '#1a1a1a', mb: 2 }}>MENU</Typography>
+          <List>
+            {[
+              { name: 'Home', to: '/' },
+              { name: 'Shop', to: '/shop' },
+              { name: '3D Configurator', to: '/configurator' },
+              { name: 'About', to: '/about' },
+              { name: 'Contact', to: '/contact' },
+            ].map((item) => (
+              <ListItem key={item.name} disablePadding sx={{ mb: 1 }}>
+                <Link 
+                  to={item.to} 
+                  style={{ textDecoration: 'none', width: '100%' }}
+                  onClick={handleDrawerToggle}
+                >
+                  <ListItemText 
+                    primary={
+                      <Typography sx={{ fontWeight: 600, color: '#333', fontSize: '1.1rem' }}>
+                        {item.name}
+                      </Typography>
+                    }
+                  />
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
     </Box>
   );
 };

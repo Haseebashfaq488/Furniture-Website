@@ -4,9 +4,12 @@ import Navbar from './Navbar';
 import Home from './pages/HomePage/Home';
 import ShopPage from './pages/ShopPage/ShopPage';
 import ConfiguratorPage from './pages/ConfiguratorPage/ConfiguratorPage';
+import SingleProductPage from './pages/ShopPage/SingleProductPage';
 import AboutPage from './pages/AboutPage/AboutPage';
+import AuthPage from './pages/AuthPage/AuthPage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
+import { AuthProvider } from './context/AuthContext';
 import Footer from './Footer';
-
 // Define the global theme matching CozyCorner demo
 const theme = createTheme({
   typography: {
@@ -40,17 +43,22 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/configurator" element={<ConfiguratorPage />} />
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
-      <Footer />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/product/:id" element={<SingleProductPage />} />
+          <Route path="/configurator" element={<ConfiguratorPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Routes>
+        <Footer />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
