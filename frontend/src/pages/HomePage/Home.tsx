@@ -1,26 +1,33 @@
 import { Box } from '@mui/material';
-import HeroBanner from './HeroBanner';
-import FeaturesAndCategories from './FeaturesAndCategories';
-import ShopByColor from './ShopByColor';
+import ParallaxHero from './ParallaxHero';
+import FloatingCategories from './FloatingCategories';
+import ProductSpotlight from './ProductSpotlight';
+import MarqueeTestimonials from './MarqueeTestimonials';
 import IlluminateYourWorld from './IlluminateYourWorld';
-import PromotionalBanner from './PromotionalBanner';
-import SustainabilitySection from './SustainabilitySection';
-import Testimonials from './Testimonials';
-import { HeroSection, FeaturesSection } from './cozycorner';
-
 
 const Home = () => {
   return (
-    <Box>
-      <HeroBanner />
-      <FeaturesAndCategories />
-      <ShopByColor />
+    <Box
+      sx={{
+        position: 'relative',
+        zIndex: 2,
+        bgcolor: '#fff',
+      }}
+    >
+      {/* 1. Parallax Expansion Hero */}
+      <ParallaxHero />
+
+      {/* 2. Floating Grid Categories */}
+      <FloatingCategories />
+
+      {/* 3. Lighting Gallery (existing) */}
       <IlluminateYourWorld />
-      <PromotionalBanner />
-      <SustainabilitySection />
-      <Testimonials />
-      <HeroSection />
-      <FeaturesSection />
+
+      {/* 4. Sticky-Scrub Product Spotlight */}
+      <ProductSpotlight />
+
+      {/* 5. Infinite Marquee Testimonials */}
+      <MarqueeTestimonials />
     </Box>
   );
 };

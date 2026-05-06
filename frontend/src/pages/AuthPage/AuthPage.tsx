@@ -61,8 +61,7 @@ const AuthPage = () => {
       <Grid container>
         {/* Left Image Section */}
         <Grid 
-          item 
-          xs={12} md={6} 
+          size={{ xs: 12, md: 6 }}
           sx={{
             display: { xs: 'none', md: 'block' },
             backgroundImage: 'url(https://images.unsplash.com/photo-1618220179428-22790b46a0eb?auto=format&fit=crop&w=1200&q=80)',
@@ -98,7 +97,7 @@ const AuthPage = () => {
         </Grid>
 
         {/* Right Form Section */}
-        <Grid item xs={12} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: { xs: 3, sm: 6, md: 8 }, bgcolor: '#fafafa' }}>
+        <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: { xs: 3, sm: 6, md: 8 }, bgcolor: '#fafafa' }}>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}

@@ -19,8 +19,18 @@ const Footer = () => {
   };
 
   return (
-    <Box sx={{ bgcolor: '#fff', color: '#333', pt: 8, pb: 2, borderTop: '1px solid #eaeaea' }}>
-      <Container maxWidth="xl">
+    <Box
+      sx={{
+        bgcolor: '#fff',
+        color: '#333',
+        pt: 8,
+        pb: 2,
+        borderTop: '1px solid #eaeaea',
+        position: 'sticky',
+        bottom: 0,
+        zIndex: 1,
+      }}
+    >      <Container maxWidth="xl">
 
         {/* Newsletter Row */}
         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between', alignItems: 'center', mb: 8, gap: 4 }}>

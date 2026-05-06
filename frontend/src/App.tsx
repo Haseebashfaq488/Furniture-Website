@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 import Navbar from './Navbar';
 import Home from './pages/HomePage/Home';
 import ShopPage from './pages/ShopPage/ShopPage';
@@ -49,18 +49,29 @@ function App() {
       <CartProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/product/:id" element={<SingleProductPage />} />
-          <Route path="/configurator" element={<ConfiguratorPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/cart" element={<CartPage />} />
-        </Routes>
-        <Footer />
+          {/* Footer sits behind everything for the "reveal" effect */}
+
+          {/* Main content slides over the footer */}
+          <Box
+            sx={{
+              position: 'relative',
+              zIndex: 2,
+              bgcolor: '#fff',
+            }}
+          >
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/shop" element={<ShopPage />} />
+              <Route path="/product/:id" element={<SingleProductPage />} />
+              <Route path="/configurator" element={<ConfiguratorPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/cart" element={<CartPage />} />
+            </Routes>
+            <Footer />
+          </Box>
         </ThemeProvider>
       </CartProvider>
     </AuthProvider>
