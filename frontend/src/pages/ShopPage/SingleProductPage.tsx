@@ -4,6 +4,9 @@ import { Box, Container, Grid, Typography, Button, CircularProgress, Alert, Pape
 import Rating from '@mui/material/Rating';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface Product {
   _id: string;
@@ -24,6 +27,12 @@ const SingleProductPage = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [addMessage, setAddMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  const [addingToCart, setAddingToCart] = useState(false);
+  
+  const { addToCart } = useCart();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   
   useEffect(() => {
     const fetchProduct = async () => {
@@ -43,6 +52,26 @@ const SingleProductPage = () => {
 
     fetchProduct();
   }, [id]);
+
+  const handleAddToCart = async () => {
+    if (!isAuthenticated) {
+      navigate('/auth');
+      return;
+    }
+    if (!product) return;
+
+    setAddingToCart(true);
+    setAddMessage(null);
+    try {
+      await addToCart(product._id, 1);
+      setAddMessage({ type: 'success', text: 'Added to cart successfully!' });
+      setTimeout(() => setAddMessage(null), 3000);
+    } catch (err: any) {
+      setAddMessage({ type: 'error', text: err.message || 'Failed to add to cart' });
+    } finally {
+      setAddingToCart(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -125,8 +154,9 @@ const SingleProductPage = () => {
                 variant="contained" 
                 color="primary" 
                 size="large" 
-                startIcon={<ShoppingCartOutlinedIcon />}
-                disabled={product.stock === 0}
+                startIcon={addingToCart ? <CircularProgress size={20} color="inherit" /> : <ShoppingCartOutlinedIcon />}
+                disabled={product.stock === 0 || addingToCart}
+                onClick={handleAddToCart}
                 sx={{ 
                   py: 1.5, 
                   fontWeight: 700, 
@@ -135,8 +165,13 @@ const SingleProductPage = () => {
                   borderRadius: 2
                 }}
               >
-                {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
+                {product.stock > 0 ? (addingToCart ? 'Adding...' : 'Add to Cart') : 'Out of Stock'}
               </Button>
+              {addMessage && (
+                <Alert severity={addMessage.type} sx={{ mt: 2 }}>
+                  {addMessage.text}
+                </Alert>
+              )}
             </Box>
           </Grid>
         </Grid>

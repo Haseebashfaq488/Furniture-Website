@@ -8,7 +8,9 @@ import SingleProductPage from './pages/ShopPage/SingleProductPage';
 import AboutPage from './pages/AboutPage/AboutPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+import CartPage from './pages/CartPage/CartPage';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 import Footer from './Footer';
 // Define the global theme matching CozyCorner demo
 const theme = createTheme({
@@ -44,8 +46,9 @@ const theme = createTheme({
 function App() {
   return (
     <AuthProvider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <CartProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -55,9 +58,11 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
         <Footer />
-      </ThemeProvider>
+        </ThemeProvider>
+      </CartProvider>
     </AuthProvider>
   );
 }

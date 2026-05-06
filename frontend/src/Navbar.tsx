@@ -25,12 +25,17 @@ import {
   Menu as MenuIcon,
 } from '@mui/icons-material';
 import { useAuth } from './context/AuthContext';
+import { useCart } from './context/CartContext';
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const { cart } = useCart();
+  
+  // Calculate total items in cart
+  const cartItemCount = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
   return (
     <Box sx={{ bgcolor: '#ffffff', boxShadow: '0 2px 10px rgba(0,0,0,0.06)' }}>
       {/* Top Promotion Banner */}
@@ -181,11 +186,13 @@ const Navbar = () => {
                 </Badge>
               </IconButton>
 
-              <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
-                <Badge badgeContent={2} color="success">
-                  <ShoppingBagOutlined />
-                </Badge>
-              </IconButton>
+              <Link to="/cart">
+                <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
+                  <Badge badgeContent={cartItemCount} color="success" invisible={cartItemCount === 0}>
+                    <ShoppingBagOutlined />
+                  </Badge>
+                </IconButton>
+              </Link>
             </Box>
           </Box>
         </Box>
