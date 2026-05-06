@@ -71,7 +71,7 @@ const Navbar = () => {
           {/* Logo with Hover Animation */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 300 }}
+            transition={{ type: 'spring' as const, stiffness: 300 }}
           >
             <Link to="/" style={{ textDecoration: 'none' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, cursor: 'pointer' }}>

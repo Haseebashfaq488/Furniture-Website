@@ -15,12 +15,17 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 interface ShopSidebarProps {
   priceRange: number[];
   setPriceRange: (value: number[]) => void;
+  activeCategory: string;
+  setActiveCategory: (value: string) => void;
 }
 
-const ShopSidebar: React.FC<ShopSidebarProps> = ({ priceRange, setPriceRange }) => {
-  const categories = [
-    'Kitchen', 'Lighting', 'Living room', 'Miscellaneous', 'Office', 'Sofas', 'Tables', 'Wardrobes'
-  ];
+const ShopSidebar: React.FC<ShopSidebarProps> = ({ 
+  priceRange, 
+  setPriceRange, 
+  activeCategory, 
+  setActiveCategory 
+}) => {
+  const categories = ['All', 'Sofa', 'Table', 'Chair', 'Bed', 'Other'];
 
   const brands = ['IdealInstitute', 'BroyHill', 'CornDell', 'PlushLounge', 'ComfortHome'];
 
@@ -29,19 +34,23 @@ const ShopSidebar: React.FC<ShopSidebarProps> = ({ priceRange, setPriceRange }) 
       width: 250, 
       display: { xs: 'none', md: 'block' },
       position: 'sticky',
-      top: 100, // Adjusted for navbar height
+      top: 100,
       alignSelf: 'start',
       height: 'fit-content',
       pr: 2,
     }}>
       {/* Categories */}
       <Box sx={{ mb: 4 }}>
-        <ListCategories categories={categories} />
+        <ListCategories 
+          categories={categories} 
+          activeCategory={activeCategory} 
+          setActiveCategory={setActiveCategory} 
+        />
       </Box>
 
       <Divider sx={{ my: 1, borderColor: '#f0f0f0' }} />
-
-      {/* Brands Accordion */}
+      
+      {/* ... brands and other filters ... */}
       <FilterAccordion title="Brands">
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}>
           {brands.map((brand) => (
@@ -57,7 +66,6 @@ const ShopSidebar: React.FC<ShopSidebarProps> = ({ priceRange, setPriceRange }) 
 
       <Divider sx={{ my: 2 }} />
 
-      {/* Price Accordion */}
       <FilterAccordion title="Price">
         <Box sx={{ px: 1, pt: 2 }}>
           <Slider
@@ -65,7 +73,7 @@ const ShopSidebar: React.FC<ShopSidebarProps> = ({ priceRange, setPriceRange }) 
             onChange={(_, newValue) => setPriceRange(newValue as number[])}
             valueLabelDisplay="auto"
             min={0}
-            max={5000}
+            max={1000}
             size="small"
             sx={{ 
                 color: '#1fa055',
@@ -78,47 +86,38 @@ const ShopSidebar: React.FC<ShopSidebarProps> = ({ priceRange, setPriceRange }) 
           </Box>
         </Box>
       </FilterAccordion>
-
+      
       <Divider sx={{ my: 2 }} />
-
-      {/* Color Accordion */}
-      <FilterAccordion title="Color">
-        <Typography variant="caption" sx={{ color: '#999' }}>Color options here...</Typography>
-      </FilterAccordion>
-
-      <Divider sx={{ my: 2 }} />
-
-      {/* Product Type Accordion */}
-      <FilterAccordion title="Product Type">
-        <Typography variant="caption" sx={{ color: '#999' }}>Type options here...</Typography>
-      </FilterAccordion>
-
-      <Divider sx={{ my: 2 }} />
-
-      {/* Finish Accordion */}
-      <FilterAccordion title="Finish">
-        <Typography variant="caption" sx={{ color: '#999' }}>Finish options here...</Typography>
-      </FilterAccordion>
+      <FilterAccordion title="Color"><Typography variant="caption" sx={{ color: '#999' }}>Options coming soon...</Typography></FilterAccordion>
     </Box>
   );
 };
 
-const ListCategories = ({ categories }: { categories: string[] }) => (
+const ListCategories = ({ 
+  categories, 
+  activeCategory, 
+  setActiveCategory 
+}: { 
+  categories: string[], 
+  activeCategory: string, 
+  setActiveCategory: (v: string) => void 
+}) => (
   <Box>
     {categories.map((cat) => (
       <Typography 
         key={cat} 
+        onClick={() => setActiveCategory(cat)}
         sx={{ 
           fontSize: '0.95rem', 
-          fontWeight: 400, 
+          fontWeight: cat === activeCategory ? 700 : 400, 
           py: 0.8, 
           cursor: 'pointer', 
-          color: '#555',
-          borderLeft: cat === 'Living room' ? '3px solid #1fa055' : '3px solid transparent',
+          color: cat === activeCategory ? '#1fa055' : '#555',
+          borderLeft: cat === activeCategory ? '3px solid #1fa055' : '3px solid transparent',
           pl: 1.5,
           ml: -1.5,
-          '&:hover': { color: '#1fa055' },
-          ...(cat === 'Living room' && { color: '#1fa055', fontWeight: 700 })
+          transition: 'all 0.2s ease',
+          '&:hover': { color: '#1fa055', pl: 2 },
         }}
       >
         {cat}

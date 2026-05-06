@@ -51,7 +51,7 @@ const FeaturesAndCategories = () => {
             <motion.div
               key={index}
               whileHover={{ y: -8 }}
-              transition={{ type: 'spring', stiffness: 300 }}
+              transition={{ type: 'spring' as const, stiffness: 300 }}
             >
               <Box
                 sx={{

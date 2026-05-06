@@ -17,16 +17,20 @@ import ShopSidebar from './ShopSidebar';
 import TopColorFilter from './TopColorFilter';
 
 const ShopPage = () => {
-  const [selectedFilters, setSelectedFilters] = useState<string[]>(['Burgundy Red', 'Chairs']);
-  const [priceRange, setPriceRange] = useState<number[]>([200, 2500]);
+  const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [priceRange, setPriceRange] = useState<number[]>([0, 1000]);
 
   const removeFilter = (filter: string) => {
-    setSelectedFilters(selectedFilters.filter(f => f !== filter));
+    if (filter === activeCategory) {
+      setActiveCategory('All');
+    }
   };
+
+  const selectedFilters = activeCategory !== 'All' ? [activeCategory] : [];
 
   return (
     <Box sx={{ bgcolor: '#fff', minHeight: '100vh', pb: 10 }}>
-      {/* Breadcrumbs Section */}
+      {/* ... breadcrumbs ... */}
       <Box sx={{ borderBottom: '1px solid #eee', py: 2, mb: 4 }}>
         <Container maxWidth="xl">
           <Breadcrumbs separator="›" aria-label="breadcrumb" sx={{ fontSize: '0.85rem' }}>
@@ -37,15 +41,12 @@ const ShopPage = () => {
       </Box>
 
       <Container maxWidth="xl">
-        {/* Title */}
         <Typography variant="h3" sx={{ fontWeight: 800, mb: 4, letterSpacing: '-0.5px' }}>
           Shop
         </Typography>
 
-        {/* Top Horizontal Color Filter */}
         <TopColorFilter />
 
-        {/* Selected Filters & Controls Bar */}
         <Box sx={{ 
           display: 'flex', 
           justifyContent: 'space-between', 
@@ -54,7 +55,6 @@ const ShopPage = () => {
           flexWrap: 'wrap',
           gap: 2
         }}>
-          {/* Active Chips */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
              <Typography variant="caption" sx={{ fontWeight: 700, color: '#999', textTransform: 'uppercase' }}>Selected filters</Typography>
              <Box sx={{ display: 'flex', gap: 1 }}>
@@ -74,11 +74,12 @@ const ShopPage = () => {
                     }}
                   />
                 ))}
+                {selectedFilters.length === 0 && <Typography variant="body2" sx={{ color: '#ccc', fontStyle: 'italic' }}>None</Typography>}
              </Box>
           </Box>
 
-          {/* View & Sort Controls */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+            {/* ... view controls ... */}
             <Box sx={{ display: 'flex', alignItems: 'center', bgcolor: '#f9f9f9', borderRadius: 2, p: 0.5 }}>
                 <IconButton size="small"><GridView sx={{ fontSize: 18 }} /></IconButton>
                 <IconButton size="small" color="inherit" sx={{ opacity: 0.3 }}><ViewModule sx={{ fontSize: 18 }} /></IconButton>
@@ -117,12 +118,18 @@ const ShopPage = () => {
         </Box>
 
         <Box sx={{ display: 'flex', gap: 6, position: 'relative' }}>
-          {/* Sidebar - Sticky */}
-          <ShopSidebar priceRange={priceRange} setPriceRange={setPriceRange} />
+          <ShopSidebar 
+            priceRange={priceRange} 
+            setPriceRange={setPriceRange} 
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+          />
 
-          {/* Product Grid - Scrollable */}
           <Box sx={{ flex: 1 }}>
-            <ProductSlider />
+            <ProductSlider 
+              activeCategory={activeCategory} 
+              priceRange={priceRange} 
+            />
             
             {/* Pagination Placeholder */}
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 8, gap: 1 }}>

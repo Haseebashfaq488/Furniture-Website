@@ -146,7 +146,7 @@ const ProfilePage = () => {
               </Typography>
 
               <Grid container spacing={4} sx={{ mb: 6 }}>
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <Box sx={{ p: 3, bgcolor: '#fff', borderRadius: 2, border: '1px solid #eee' }}>
                     <Typography variant="body2" color="text.secondary" sx={{ mb: 1, textTransform: 'uppercase', letterSpacing: 1, fontSize: '0.75rem', fontWeight: 700 }}>
                       Full Name
@@ -157,7 +157,7 @@ const ProfilePage = () => {
                   </Box>
                 </Grid>
 
-                <Grid item xs={12} sm={6}>
+                <Grid size={{ xs: 12, sm: 6 }}>
                   <Box sx={{ p: 3, bgcolor: '#fff', borderRadius: 2, border: '1px solid #eee' }}>
                     <Typography variant="body2" color="text.secondary" sx={{ mb: 1, textTransform: 'uppercase', letterSpacing: 1, fontSize: '0.75rem', fontWeight: 700 }}>
                       Email Address
@@ -168,7 +168,7 @@ const ProfilePage = () => {
                   </Box>
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid size={{ xs: 12 }}>
                   <Box sx={{ p: 3, bgcolor: '#fff', borderRadius: 2, border: '1px solid #eee' }}>
                     <Typography variant="body2" color="text.secondary" sx={{ mb: 1, textTransform: 'uppercase', letterSpacing: 1, fontSize: '0.75rem', fontWeight: 700 }}>
                       Account ID
@@ -196,7 +196,7 @@ const ProfilePage = () => {
               ) : (
                 <Grid container spacing={3}>
                   {orders.map((order) => (
-                    <Grid item xs={12} key={order._id}>
+                    <Grid size={{ xs: 12 }} key={order._id}>
                       <Paper elevation={0} sx={{ p: 3, borderRadius: 2, border: '1px solid #eaeaea', bgcolor: '#fff' }}>
                         <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', mb: 2, gap: 2 }}>
                           <Box>

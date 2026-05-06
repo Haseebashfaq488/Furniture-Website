@@ -6,6 +6,7 @@ import ShopPage from './pages/ShopPage/ShopPage';
 import ConfiguratorPage from './pages/ConfiguratorPage/ConfiguratorPage';
 import SingleProductPage from './pages/ShopPage/SingleProductPage';
 import AboutPage from './pages/AboutPage/AboutPage';
+import ContactPage from './pages/ContactPage/ContactPage';
 import AuthPage from './pages/AuthPage/AuthPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import CartPage from './pages/CartPage/CartPage';
@@ -56,6 +57,7 @@ function App() {
           <Route path="/product/:id" element={<SingleProductPage />} />
           <Route path="/configurator" element={<ConfiguratorPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/cart" element={<CartPage />} />

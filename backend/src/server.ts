@@ -6,6 +6,7 @@ import authRoutes from './routes/authRoutes'
 import productRoutes from './routes/productRoutes'
 import cartRoutes from './routes/cartRoutes'
 import orderRoutes from './routes/orderRoutes'
+import contactRoutes from './routes/contactRoutes'
 
 // Load environment variables from .env file
 dotenv.config()
@@ -22,6 +23,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/cart', cartRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/contact', contactRoutes)
 
 // Test route - just to confirm server is running
 app.get('/', (req, res) => {

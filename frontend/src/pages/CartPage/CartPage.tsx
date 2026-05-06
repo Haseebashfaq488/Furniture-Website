@@ -22,7 +22,7 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
+  show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 300, damping: 24 } }
 };
 
 const CartPage = () => {
@@ -137,8 +137,8 @@ const CartPage = () => {
         </Typography>
       </motion.div>
 
-      <Grid container spacing={5} direction="column">
-        <Grid item xs={12}>
+      <Grid container spacing={5}>
+        <Grid size={{ xs: 12, md: 8 }}>
           <motion.div variants={containerVariants} initial="hidden" animate="show">
             {cart.items.map((item) => (
               <motion.div key={item.productId._id} variants={itemVariants}>
@@ -150,8 +150,8 @@ const CartPage = () => {
                     '&:hover': { boxShadow: '0 8px 24px rgba(0,0,0,0.06)', borderColor: '#e0e0e0' }
                   }}
                 >
-                  <Grid container spacing={3} alignItems="center">
-                    <Grid item xs={4} sm={3}>
+                  <Grid container spacing={3} sx={{ alignItems: 'center' }}>
+                    <Grid size={{ xs: 4, sm: 3 }}>
                       <Box
                         sx={{
                           width: '100%',
@@ -163,7 +163,7 @@ const CartPage = () => {
                         }}
                       />
                     </Grid>
-                    <Grid item xs={8} sm={4}>
+                    <Grid size={{ xs: 8, sm: 4 }}>
                       <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.5, color: '#1a1a1a', lineHeight: 1.2 }}>
                         {item.productId.name}
                       </Typography>
@@ -171,7 +171,7 @@ const CartPage = () => {
                         ${item.productId.price.toFixed(2)}
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid size={{ xs: 12, sm: 3 }}>
                       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'flex-start', sm: 'center' }, bgcolor: '#f5f5f5', borderRadius: 50, p: 0.5, width: 'fit-content' }}>
                         <IconButton 
                           size="small" 
@@ -194,7 +194,7 @@ const CartPage = () => {
                         </IconButton>
                       </Box>
                     </Grid>
-                    <Grid item xs={12} sm={2} sx={{ display: 'flex', flexDirection: 'column', alignItems: { xs: 'flex-start', sm: 'flex-end' }, justifyContent: 'center' }}>
+                    <Grid size={{ xs: 12, sm: 2 }} sx={{ display: 'flex', flexDirection: 'column', alignItems: { xs: 'flex-start', sm: 'flex-end' }, justifyContent: 'center' }}>
                       <Typography variant="h6" sx={{ color: '#1a1a1a', fontWeight: 800 }}>
                         ${(item.productId.price * item.quantity).toFixed(2)}
                       </Typography>
@@ -213,57 +213,59 @@ const CartPage = () => {
           </motion.div>
         </Grid>
 
-        <Grid item xs={12}>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-            <Paper elevation={0} sx={{ p: 4, border: '1px solid #eaeaea', borderRadius: 3, bgcolor: '#fafafa' }}>
-              <Typography variant="h5" gutterBottom sx={{ fontWeight: 800, mb: 3 }}>
-                Order Summary
-              </Typography>
-              
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-                <Typography color="text.secondary" fontSize="1.1rem">Subtotal</Typography>
-                <Typography fontWeight="bold" fontSize="1.1rem">${cart.totalPrice?.toFixed(2) || '0.00'}</Typography>
-              </Box>
-              
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-                <Typography color="text.secondary" fontSize="1.1rem">Shipping</Typography>
-                <Typography fontWeight="bold" fontSize="1.1rem" color="primary.main">Free</Typography>
-              </Box>
-
-              <Divider sx={{ my: 3, borderColor: '#ddd' }} />
-
-              {checkoutError && (
-                <Alert severity="error" sx={{ mb: 3 }}>
-                  {checkoutError}
-                </Alert>
-              )}
-
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4, alignItems: 'center' }}>
-                <Typography variant="h5" fontWeight="900">Total</Typography>
-                <Typography variant="h4" fontWeight="900" color="primary.main">
-                  ${cart.totalPrice?.toFixed(2) || '0.00'}
+        <Grid size={{ xs: 12, md: 4 }}>
+          <Box sx={{ position: { md: 'sticky' }, top: { md: 100 } }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
+              <Paper elevation={0} sx={{ p: 4, border: '1px solid #eaeaea', borderRadius: 3, bgcolor: '#fafafa' }}>
+                <Typography variant="h5" gutterBottom sx={{ fontWeight: 800, mb: 3 }}>
+                  Order Summary
                 </Typography>
-              </Box>
+                
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+                  <Typography sx={{ color: 'text.secondary', fontSize: '1.1rem' }}>Subtotal</Typography>
+                  <Typography sx={{ fontWeight: 'bold', fontSize: '1.1rem' }}>${cart.totalPrice?.toFixed(2) || '0.00'}</Typography>
+                </Box>
+                
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
+                  <Typography sx={{ color: 'text.secondary', fontSize: '1.1rem' }}>Shipping</Typography>
+                  <Typography sx={{ fontWeight: 'bold', fontSize: '1.1rem', color: 'primary.main' }}>Free</Typography>
+                </Box>
 
-              <Button 
-                variant="contained" 
-                color="primary" 
-                fullWidth 
-                size="large"
-                startIcon={checkoutLoading ? <CircularProgress size={20} color="inherit" /> : <ShoppingCartCheckoutIcon />}
-                disabled={checkoutLoading}
-                onClick={handleCheckout}
-                sx={{ 
-                  py: 1.8, fontSize: '1.1rem', fontWeight: 800, borderRadius: 2, textTransform: 'none',
-                  boxShadow: '0 4px 14px rgba(22, 156, 92, 0.4)',
-                  transition: 'transform 0.2s',
-                  '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 20px rgba(22, 156, 92, 0.5)' }
-                }}
-              >
-                {checkoutLoading ? 'Processing...' : 'Proceed to Checkout'}
-              </Button>
-            </Paper>
-          </motion.div>
+                <Divider sx={{ my: 3, borderColor: '#ddd' }} />
+
+                {checkoutError && (
+                  <Alert severity="error" sx={{ mb: 3 }}>
+                    {checkoutError}
+                  </Alert>
+                )}
+
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4, alignItems: 'center' }}>
+                  <Typography variant="h5" sx={{ fontWeight: '900' }}>Total</Typography>
+                  <Typography variant="h4" sx={{ fontWeight: '900', color: 'primary.main' }}>
+                    ${cart.totalPrice?.toFixed(2) || '0.00'}
+                  </Typography>
+                </Box>
+
+                <Button 
+                  variant="contained" 
+                  color="primary" 
+                  fullWidth 
+                  size="large"
+                  startIcon={checkoutLoading ? <CircularProgress size={20} color="inherit" /> : <ShoppingCartCheckoutIcon />}
+                  disabled={checkoutLoading}
+                  onClick={handleCheckout}
+                  sx={{ 
+                    py: 1.8, fontSize: '1.1rem', fontWeight: 800, borderRadius: 2, textTransform: 'none',
+                    boxShadow: '0 4px 14px rgba(22, 156, 92, 0.4)',
+                    transition: 'transform 0.2s',
+                    '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 20px rgba(22, 156, 92, 0.5)' }
+                  }}
+                >
+                  {checkoutLoading ? 'Processing...' : 'Proceed to Checkout'}
+                </Button>
+              </Paper>
+            </motion.div>
+          </Box>
         </Grid>
       </Grid>
     </Container>

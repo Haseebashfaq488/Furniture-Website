@@ -57,12 +57,11 @@ const AuthPage = () => {
   };
 
   return (
-    <Box sx={{ minHeight: '85vh', display: 'flex' }}>
-      <Grid container>
+    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Grid container sx={{ flex: 1 }}>
         {/* Left Image Section */}
         <Grid 
-          item 
-          xs={12} md={6} 
+          size={{ xs: 12, md: 6 }} 
           sx={{
             display: { xs: 'none', md: 'block' },
             backgroundImage: 'url(https://images.unsplash.com/photo-1618220179428-22790b46a0eb?auto=format&fit=crop&w=1200&q=80)',
@@ -98,7 +97,7 @@ const AuthPage = () => {
         </Grid>
 
         {/* Right Form Section */}
-        <Grid item xs={12} md={6} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: { xs: 3, sm: 6, md: 8 }, bgcolor: '#fafafa' }}>
+        <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: { xs: 3, sm: 6, md: 8 }, bgcolor: '#fafafa' }}>
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -106,7 +105,7 @@ const AuthPage = () => {
             style={{ width: '100%', maxWidth: '450px' }}
           >
             <Paper elevation={0} sx={{ p: { xs: 3, sm: 5 }, borderRadius: 3, border: '1px solid #eaeaea', bgcolor: '#fff', boxShadow: '0 10px 40px rgba(0,0,0,0.04)' }}>
-              <Typography variant="h4" component="h1" align="center" gutterBottom sx={{ fontWeight: 800, color: '#1a1a1a', mb: 3 }}>
+              <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 800, color: '#1a1a1a', mb: 3, textAlign: 'center' }}>
                 {tabIndex === 0 ? 'Welcome Back' : 'Create an Account'}
               </Typography>
 
