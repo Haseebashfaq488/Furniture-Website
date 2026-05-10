@@ -1,4 +1,5 @@
 import { Box, Container, Typography, Chip, IconButton } from '@mui/material';
+import { Link } from 'react-router-dom';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import pink from '../../assets/images/3.jpg';
 import blue from '../../assets/images/4.jpg';
@@ -32,12 +33,16 @@ const ShopByColor = () => {
 
             <Box
               key={idx}
+              component={Link}
+              to={`/shop?color=${block.name}`}
               sx={{
+                textDecoration: 'none',
                 height: 450,
                 borderRadius: 2,
                 position: 'relative',
                 overflow: 'hidden',
                 cursor: 'pointer',
+                display: 'block',
                 '&:hover .bg-img': { transform: 'scale(1.1)' }
               }}
             >
@@ -70,6 +75,8 @@ const ShopByColor = () => {
           {colorFilters.map((filter, idx) => (
             <Chip
               key={idx}
+              component={Link}
+              to={`/shop?color=${filter.name}`}
               label={
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                   <Box sx={{ width: 14, height: 14, borderRadius: '50%', bgcolor: filter.color }} />
@@ -82,6 +89,7 @@ const ShopByColor = () => {
                 borderColor: '#ccc',
                 py: 2.5, px: 2,
                 backgroundColor: 'transparent',
+                textDecoration: 'none',
                 '&:hover': { bgcolor: '#f9f9f9', borderColor: '#aaa' },
                 cursor: 'pointer'
               }}

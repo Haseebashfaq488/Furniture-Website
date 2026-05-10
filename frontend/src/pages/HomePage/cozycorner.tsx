@@ -14,9 +14,10 @@ import {
     HeadsetMic,     // ✅ correct
 } from '@mui/icons-material';
 
+import { Link } from 'react-router-dom';
 import ForestIcon from '@mui/icons-material/Forest';
 import cozycorner from '../../assets/images/Whycozycorner.jpg';
-import WaterFillButton from '../ShopPage/AnimatedButton';
+import { Button } from '@mui/material';
 
 const HeroSection = () => {
 
@@ -36,10 +37,11 @@ const HeroSection = () => {
                                 variant="h2"
                                 component="h1"
                                 sx={{
-                                    fontSize: { xs: '2.5rem', md: '3.2rem' },
+                                    fontSize: { xs: '2rem', sm: '2.5rem', md: '3.2rem' },
                                     fontWeight: 700,
-                                    lineHeight: 1.1,
+                                    lineHeight: 1.2,
                                     mb: 3,
+                                    textAlign: { xs: 'center', md: 'left' }
                                 }}
                             >
                                 Specializes in artisanal, handcrafted furniture, blending traditional woodworking techniques!
@@ -48,28 +50,42 @@ const HeroSection = () => {
                             <Typography
                                 variant="body1"
                                 sx={{
-                                    fontSize: '1.1rem',
+                                    fontSize: { xs: '1rem', md: '1.1rem' },
                                     color: '#555',
                                     mb: 4,
-                                    maxWidth: '85%',
+                                    maxWidth: { xs: '100%', md: '85%' },
+                                    textAlign: { xs: 'center', md: 'left' }
                                 }}
                             >
                                 With contemporary design to create timeless pieces that add warmth and character to any space.
                             </Typography>
 
-                            <WaterFillButton
-                                sx={{
-                                    borderRadius: '50px',
-                                    px: 4,
-                                    py: 1.5,
-                                    textTransform: 'none',
-                                    fontSize: '1.1rem',
-                                    fillColor: "#0ea5e9",
-
-                                }}
-                            >
-                                About CozyCorner
-                            </WaterFillButton>
+                            <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                                <Button
+                                    component={Link}
+                                    to="/about"
+                                    variant="contained"
+                                    sx={{
+                                        borderRadius: '8px',
+                                        bgcolor: '#0ea5e9',
+                                        color: '#fff',
+                                        px: { xs: 4, md: 5 },
+                                        py: 1.5,
+                                        textTransform: 'none',
+                                        fontSize: '1rem',
+                                        fontWeight: 600,
+                                        boxShadow: 'none',
+                                        transition: 'all 0.3s ease',
+                                        '&:hover': {
+                                            bgcolor: '#0284c7',
+                                            transform: 'translateY(-2px)',
+                                            boxShadow: '0 8px 16px rgba(0,0,0,0.2)'
+                                        }
+                                    }}
+                                >
+                                    About CozyCorner
+                                </Button>
+                            </Box>
                         </Box>
                     </Grid>
 

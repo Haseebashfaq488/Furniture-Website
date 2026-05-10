@@ -1,6 +1,5 @@
-import { Box, Container, Typography } from '@mui/material';
-import WaterFillButton from '../ShopPage/AnimatedButton';
-import { motion } from 'framer-motion';
+import { Box, Container, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import backgroundimage from '../../assets/images/movingbackground.jpg';
 
 const SustainabilitySection = () => {
@@ -8,7 +7,7 @@ const SustainabilitySection = () => {
     <Box sx={{
       position: 'relative',
       width: '100%',
-      height: { xs: 500, md: 650 },
+      minHeight: { xs: 450, md: 650 },
       bgcolor: '#111',
       mt: 4,
       display: 'flex',
@@ -19,31 +18,38 @@ const SustainabilitySection = () => {
       backgroundSize: 'cover'
     }}>
       <Container maxWidth="xl">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <Box sx={{ maxWidth: 800 }}>
-            <Typography variant="overline" sx={{ letterSpacing: 2, color: '#aaa', fontWeight: 600, mb: 1, display: 'block' }}>
-              SUSTAINABILITY
-            </Typography>
-            <Typography variant="h2" sx={{ fontWeight: 800, mb: 3, lineHeight: 1.2, color: '#fff' }}>
-              When creating our furniture, we care about the environment. <Typography component="span" variant="h2" sx={{ color: '#169C5C', fontWeight: 800 }}>We do not produce</Typography> waste that ends up in landfills. We use even the smallest residues during production.
-            </Typography>
-            <WaterFillButton
-              fillColor="#169C5C"
-              waveColor="#34d399"
-              sx={{
-                bgcolor: '#fff',
-                color: '#111',
-                borderRadius: 30,
-                px: 4,
-                py: 1.5,
-                fontWeight: 700,
-                '&:hover': { bgcolor: '#eee' }
-              }}
-            >
-              Discover More
-            </WaterFillButton>
-          </Box>
-        </motion.div>
+        <Box sx={{ maxWidth: { xs: '100%', md: 800 }, p: { xs: 2, md: 0 } }}>
+          <Typography variant="overline" sx={{ letterSpacing: 2, color: '#aaa', fontWeight: 600, mb: 1, display: 'block', fontSize: { xs: '0.8rem', md: '1rem' } }}>
+            SUSTAINABILITY
+          </Typography>
+          <Typography variant="h2" sx={{ fontWeight: 800, mb: 4, lineHeight: 1.3, color: '#fff', fontSize: { xs: '22px', sm: '32px', md: '40px' } }}>
+            When creating our furniture, we care about the environment. <Typography component="span" variant="h2" sx={{ color: '#169C5C', fontWeight: 800, fontSize: 'inherit' }}>We do not produce</Typography> waste that ends up in landfills. We use even the smallest residues during production.
+          </Typography>
+          <Button
+            component={Link}
+            to="/about"
+            sx={{
+              bgcolor: '#169C5C',
+              color: '#fff',
+              borderRadius: '8px',
+              px: { xs: 4, md: 5 },
+              py: 1.5,
+              fontWeight: 700,
+              fontSize: '1rem',
+              textTransform: 'none',
+              boxShadow: 'none',
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                bgcolor: '#12824C',
+                color: '#fff',
+                boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
+                transform: 'translateY(-2px)'
+              }
+            }}
+          >
+            Discover More
+          </Button>
+        </Box>
       </Container>
     </Box>
   );

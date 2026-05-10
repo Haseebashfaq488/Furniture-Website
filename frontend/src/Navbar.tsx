@@ -180,11 +180,6 @@ const Navbar = () => {
                 </IconButton>
               </Link>
 
-              <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
-                <Badge badgeContent={3} color="error">
-                  <FavoriteBorder />
-                </Badge>
-              </IconButton>
 
               <Link to="/cart">
                 <IconButton sx={{ color: '#333', '&:hover': { color: '#1fa055' } }}>
@@ -215,7 +210,6 @@ const Navbar = () => {
             {[
               { name: 'Home', to: '/' },
               { name: 'Shop', to: '/shop' },
-              { name: '3D Configurator', to: '/configurator' },
               { name: 'About', to: '/about' },
               { name: 'Contact', to: '/contact' },
             ].map((item) => (
@@ -269,7 +263,6 @@ const Navbar = () => {
             {[
               { name: 'Home', to: '/' },
               { name: 'Shop', to: '/shop' },
-              { name: '3D Configurator', to: '/configurator' },
               { name: 'About', to: '/about' },
               { name: 'Contact', to: '/contact' },
             ].map((item) => (
